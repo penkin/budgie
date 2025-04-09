@@ -33,6 +33,7 @@ defmodule Budgie.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:argon2_elixir, "~> 4.0"},
       {:phoenix, "~> 1.8.0-rc.0", override: true},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
@@ -58,7 +59,8 @@ defmodule Budgie.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 
