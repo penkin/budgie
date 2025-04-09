@@ -1,8 +1,11 @@
 defmodule Budgie.Accounts.UserNotifier do
+  @moduledoc """
+  Handles email notifications for user-related events.
+  """
   import Swoosh.Email
 
-  alias Budgie.Mailer
   alias Budgie.Accounts.User
+  alias Budgie.Mailer
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do

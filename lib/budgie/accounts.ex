@@ -6,7 +6,7 @@ defmodule Budgie.Accounts do
   import Ecto.Query, warn: false
   alias Budgie.Repo
 
-  alias Budgie.Accounts.{User, UserToken, UserNotifier}
+  alias Budgie.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

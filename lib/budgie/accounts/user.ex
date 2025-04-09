@@ -1,4 +1,7 @@
 defmodule Budgie.Accounts.User do
+  @moduledoc """
+  Defines the User schema and related changeset functions.
+  """
   use Ecto.Schema
   import Ecto.Changeset
   @primary_key {:id, :binary_id, autogenerate: true}

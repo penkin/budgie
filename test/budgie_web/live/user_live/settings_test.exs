@@ -1,9 +1,10 @@
 defmodule BudgieWeb.UserLive.SettingsTest do
   use BudgieWeb.ConnCase, async: true
 
-  alias Budgie.Accounts
-  import Phoenix.LiveViewTest
   import Budgie.AccountsFixtures
+  import Phoenix.LiveViewTest
+
+  alias Budgie.Accounts
 
   describe "Settings page" do
     test "renders settings page", %{conn: conn} do
@@ -207,6 +208,57 @@ defmodule BudgieWeb.UserLive.SettingsTest do
       assert path == ~p"/users/log-in"
       assert %{"error" => message} = flash
       assert message == "You must log in to access this page."
+    end
+  end
+
+  describe "update name form" do
+    setup %{conn: conn} do
+      user = user_fixture()
+      %{conn: log_in_user(conn, user), user: user}
+    end
+
+    test "updates the user name", %{conn: conn, user: user} do
+      new_name = "New Name"
+
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#name_form", %{
+          "user" => %{"name" => new_name}
+        })
+        |> render_submit()
+
+      assert result =~ "Name updated successfully"
+      assert Accounts.get_user!(user.id).name == new_name
+    end
+
+    test "renders errors with invalid data (phx-change)", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> element("#name_form")
+        |> render_change(%{
+          "user" => %{"name" => "A"}
+        })
+
+      assert result =~ "Change Name"
+      assert result =~ "should be at least 2 character(s)"
+    end
+
+    test "renders errors with invalid data (phx-submit)", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/users/settings")
+
+      result =
+        lv
+        |> form("#name_form", %{
+          "user" => %{"name" => ""}
+        })
+        |> render_submit()
+
+      assert result =~ "Change Name"
+      assert result =~ "can&#39;t be blank"
     end
   end
 end

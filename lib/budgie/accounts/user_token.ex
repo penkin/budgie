@@ -1,4 +1,7 @@
 defmodule Budgie.Accounts.UserToken do
+  @moduledoc """
+  Handles user authentication tokens and their validation.
+  """
   use Ecto.Schema
   import Ecto.Query
   alias Budgie.Accounts.UserToken
