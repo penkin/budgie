@@ -28,30 +28,52 @@
     </script>
   </head>
   <body>
-    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-      <%= if @current_scope do %>
-        <li>
-          <%= if @current_scope.user.name do %>
-            {@current_scope.user.name}
+    <div class="navbar bg-base-200 shadow-sm relative z-10">
+      <div class="navbar-start">
+        <a class="btn btn-ghost text-xl">Budgie</a>
+        <%= if @current_scope do %>
+          <span class="text-base-content/60">
+            <span class="ml-1 mr-4 text-base-content/30">|</span>Welcome,
+            <%= if @current_scope.user.name do %>
+              {@current_scope.user.name}
+            <% else %>
+              {@current_scope.user.email}
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+      <div class="navbar-end">
+        <%= if @current_scope do %>
+          <ul class="menu menu-horizontal px-1">
+            <li>
+              <.link href={~p"/budgets"}>Budgets</.link>
+            </li>
+          </ul>
+          <span class="mx-3 text-base-content/30">|</span>
+        <% end %>
+        <ul class="menu menu-horizontal px-1">
+          <%= if @current_scope do %>
+            <li>
+              <.link href={~p"/users/settings"}>Settings</.link>
+            </li>
+            <li>
+              <.link href={~p"/users/log-out"} method="delete">Log out</.link>
+            </li>
           <% else %>
-            {@current_scope.user.email}
+            <li>
+              <.link href={~p"/users/register"}>Register</.link>
+            </li>
+            <li>
+              <.link href={~p"/users/log-in"}>Log in</.link>
+            </li>
           <% end %>
-        </li>
-        <li>
-          <.link href={~p"/users/settings"}>Settings</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-out"} method="delete">Log out</.link>
-        </li>
-      <% else %>
-        <li>
-          <.link href={~p"/users/register"}>Register</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-in"}>Log in</.link>
-        </li>
-      <% end %>
-    </ul>
+        </ul>
+        <span class="mx-3 text-base-content/30">|</span>
+        <div class="h-[2rem]">
+          <Layouts.theme_toggle />
+        </div>
+      </div>
+    </div>
     {@inner_content}
   </body>
 </html>

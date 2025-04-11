@@ -1,9 +1,9 @@
 defmodule Budgie.AccountsTest do
   use Budgie.DataCase
 
-  alias Budgie.Accounts
-
   import Budgie.AccountsFixtures
+
+  alias Budgie.Accounts
   alias Budgie.Accounts.{User, UserToken}
 
   describe "get_user_by_email/1" do

@@ -277,14 +277,14 @@ defmodule BudgieWeb.CoreComponents do
 
   def header(assigns) do
     ~H"""
-    <header class={[@actions != [] && "flex items-center justify-between gap-6", "pb-4", @class]}>
-      <div>
+    <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
+      <div class="flex items-center">
         <h1 class="text-lg font-semibold leading-8">
           {render_slot(@inner_block)}
         </h1>
-        <p :if={@subtitle != []} class="text-sm text-base-content/70">
+        <div :if={@subtitle != []} class="text-sm text-base-content/70 ml-3">
           {render_slot(@subtitle)}
-        </p>
+        </div>
       </div>
       <div class="flex-none">{render_slot(@actions)}</div>
     </header>
