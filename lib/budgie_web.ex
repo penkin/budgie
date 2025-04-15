@@ -52,6 +52,8 @@ defmodule BudgieWeb do
     quote do
       use Phoenix.LiveView
 
+      import Budgie.Guards
+
       unquote(html_helpers())
     end
   end

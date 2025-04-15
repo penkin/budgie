@@ -54,6 +54,7 @@ defmodule BudgieWeb.Router do
       on_mount: [{BudgieWeb.UserAuth, :require_authenticated}] do
       live "/budgets", BudgetLive.List
       live "/budgets/create", BudgetLive.Create
+      live "/budgets/:budget_id", BudgetLive.Detail
       live "/users/settings", UserLive.Settings, :edit
       live "/users/settings/confirm-email/:token", UserLive.Settings, :confirm_email
     end

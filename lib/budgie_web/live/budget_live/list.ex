@@ -22,6 +22,9 @@ defmodule BudgieWeb.BudgetLive.List do
         <:col :let={budget} label="Name">{budget.name}</:col>
         <:col :let={budget} label="Start date">{budget.start_date}</:col>
         <:col :let={budget} label="End date">{budget.end_date}</:col>
+        <:col :let={budget} label="Actions">
+          <.link navigate={~p"/budgets/#{budget}"}>View</.link>
+        </:col>
       </.table>
     </Layouts.app>
     """

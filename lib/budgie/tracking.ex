@@ -16,6 +16,14 @@ defmodule Budgie.Tracking do
   def list_budgets, do: Repo.all(Budget)
 
   def list_budgets(criteria) when is_list(criteria) do
+    Repo.all(budget_query(criteria))
+  end
+
+  def get_budget(id, criteria \\ []) do
+    Repo.get(budget_query(criteria), id)
+  end
+
+  defp budget_query(criteria) do
     query = from(b in Budget)
 
     Enum.reduce(criteria, query, fn
@@ -28,10 +36,7 @@ defmodule Budgie.Tracking do
       _, query ->
         query
     end)
-    |> Repo.all()
   end
-
-  def get_budget!(id), do: Repo.get!(Budget, id)
 
   def change_budget(budget, attrs \\ %{}) do
     Budget.changeset(budget, attrs)
